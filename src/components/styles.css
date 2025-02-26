@@ -21,24 +21,24 @@
     transform: scale(1.02); /* Збільшення зображення при наведенні */
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Додавання тіні */
 }
-.game-info {
+.game-info2 {
     flex: 1 1 auto;
     margin-left: 20px;
     max-width: 600px;
     }
 
-.game-info h1 {
+.game-info2 h1 {
     margin-bottom: 15px;
     font-size: 2em;
     color:#ffffff;
     text-align: left;
     }
-.game-info p {
+.game-info2 p {
     margin-bottom: 20px;
     line-height: 1.5;
     color: #cccccc;
     }
-    .game-info h2 {
+    .game-info2 h2 {
     font-size: 1.75em;
     color: #ffffff;
     margin-bottom: 10px;

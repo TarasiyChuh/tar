@@ -20,7 +20,7 @@ h1 {
 }
 
 .game-card {
-  background-color: #4c4e4c;
+  background-color: #383838;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
   overflow: hidden;
@@ -55,6 +55,7 @@ h1 {
   box-sizing: border-box;
   word-wrap: break-word; /* Дозволяє переносити довгі слова */
   display: block; /* Запобігає зміщенню тексту */
+  
 }
 
 .game-card .game-description {

@@ -39,6 +39,7 @@ function GameLibrary() {
           <p className="game-description">Шутер </p>
         </div>
       </Link>
+      
     </div>
   );
 }

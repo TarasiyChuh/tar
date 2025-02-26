@@ -4,10 +4,10 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Sidebar from './Sidebar';   // Припускаємо, що ти вже створив цей компонент
 import Search from './Search';     // І цей компонент також
 import GameLibrary from './GameLibrary'; // Оновлений компонент бібліотеки ігор
-import Game1 from './Game1';      // Опис гри Forza Horizon 5
-import Game2 from './Game2';      // Опис гри S.T.A.L.K.E.R. 2
-import Game3 from './Game3';      // Опис гри Atomic Heart
-import Game4 from './Game4';      // Опис гри Call of Duty: MWIII
+import Game1 from './components/Game1';      // Опис гри Forza Horizon 5
+import Game2 from './components/Game2';      // Опис гри S.T.A.L.K.E.R. 2
+import Game3 from './components/Game3';      // Опис гри Atomic Heart
+import Game4 from './components/Game4';      // Опис гри Call of Duty: MWIII
 
 function App() {
   return (

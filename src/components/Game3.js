@@ -1,14 +1,14 @@
 import React from 'react';
 import './styles.css'
 
-function Game2() {
+function Game3() {
   return (
     <div className="game-details-container">
         <div className="game-page">
           <div className="content-container">
-            <img className="game-image" src="page/S.T.A.L.K.E.R._2.jpg" alt="Опис зображення" />
+            <img className="game-image" src="page/AtomicHeart.jpg" alt="Опис зображення" />
           </div>
-          <div className="game-info">
+          <div className="game-info2">
             <h1>S.T.A.L.K.E.R. 2: Серце Чорнобиля</h1>
             <p>
               «S.T.A.L.K.E.R. 2: Серце Чорнобиля» (англ. S.T.A.L.K.E.R. 2: Heart of Chornobyl) — українська рольова відеогра в жанрі постапокаліптичного
@@ -20,7 +20,7 @@ function Game2() {
         </div>
 
         <div className="game-page">
-          <div className="game-info">
+          <div className="game-info2">
             <h2>Системні вимоги:</h2>
             <div className="requirements">
               <div className="requirements-list">
@@ -50,4 +50,4 @@ function Game2() {
   );
 }
 
-export default Game2;
+export default Game3;
