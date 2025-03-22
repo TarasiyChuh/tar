@@ -1,45 +1,43 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom'; 
 
 function GameLibrary() {
+  const [games, setGames] = useState([]);
+  const navigate = useNavigate(); 
+
+  useEffect(() => {
+    fetch('http://localhost:5000/api/games')
+      .then((res) => res.json())
+      .then((data) => setGames(data))
+      .catch((error) => console.error('Error fetching games:', error));
+  }, []);
+
+  const handleCardClick = (link) => {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      alert('Будь ласка, увійди або зареєструйся, щоб переглядати деталі гри!');
+      navigate('/login');
+    } else {
+      navigate(link);
+    }
+  };
+
   return (
     <div className="game-library">
-      {/* Карточка для Forza Horizon 5 */}
-      <Link to="/game1" className="game-card">
-        <img src="/page/ForzaHorizon5.jpg" alt="Forza Horizon 5" />
-        <div className="game-info">
-          <h2 className="game-title">Forza Horizon 5</h2>
-          <p className="game-description">Гонки </p>
+      {games.map((game) => (
+        <div
+          key={game._id}
+          className="game-card"
+          onClick={() => handleCardClick(game.link)}
+          style={{ cursor: 'pointer' }}
+        >
+          <img src={game.photo} alt={game.title} />
+          <div className="game-info">
+            <h2 className="game-title">{game.title}</h2>
+            <p className="game-description">{game.description}</p>
+          </div>
         </div>
-      </Link>
-
-      {/* Карточка для S.T.A.L.K.E.R. 2 */}
-      <Link to="/game2" className="game-card">
-        <img src="/page/S.T.A.L.K.E.R._2.jpg" alt="S.T.A.L.K.E.R. 2" />
-        <div className="game-info">
-          <h2 className="game-title">S.T.A.L.K.E.R. 2</h2>
-          <p className="game-description">Постапокаліпсис</p>
-        </div>
-      </Link>
-
-      {/* Карточка для Atomic Heart */}
-      <Link to="/game3" className="game-card">
-        <img src="/page/AtomicHeart.jpg" alt="Atomic Heart" />
-        <div className="game-info">
-          <h2 className="game-title">Atomic Heart</h2>
-          <p className="game-description">Пригодницький екшен</p>
-        </div>
-      </Link>
-
-      {/* Карточка для Call of Duty: Modern Warfare III */}
-      <Link to="/game4" className="game-card">
-        <img src="/page/MWIII.png" alt="Call of Duty: MWIII" />
-        <div className="game-info">
-          <h2 className="game-title">Call of Duty</h2>
-          <p className="game-description">Шутер </p>
-        </div>
-      </Link>
-      
+      ))}
     </div>
   );
 }

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from "react-router-dom";
 import { useNavigate } from 'react-router-dom';
+import './App.css';
 
 function Sidebar() {
   const navigate = useNavigate();
@@ -17,6 +18,7 @@ function Sidebar() {
       <Link to="/account" className="sidebar-button">Акаунт</Link>
       <Link to="/library" className="sidebar-button">Бібліотека</Link>
       <Link to="/settings" className="sidebar-button">Налаштування</Link>
+      <Link to="/free-games" className="sidebar-button">Безкоштовні ігри</Link>
 
       {/* Виведення кнопок для логіну та реєстрації, якщо користувач не залогінений */}
       {!localStorage.getItem('token') ? (

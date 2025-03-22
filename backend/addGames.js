@@ -11,9 +11,10 @@ mongoose.connect('mongodb://localhost:27017/mydatabase', { useNewUrlParser: true
 const addGame = async () => {
   try {
     const newGame = new Game({
-      title: 'STALKER 2',
-      description: 'SURVIVAL',
-      link: 'https://www.cyberpunk.net'
+      title: 'Forza Horizon 5',
+      description: 'Гонки',
+      link: 'https://some-game-link.com',
+      photo: '/images/ForzaHorizon5.jpg'
     });
 
     await newGame.save();  // Зберігаємо гру в базу

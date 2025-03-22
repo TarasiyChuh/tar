@@ -16,6 +16,8 @@ const JWT_SECRET = 'supersecretkey123';  // Твій секретний ключ
 
 // Routes
 app.use('/api/auth', require('./routes/auth'));
+app.use('/api/games', require('./routes/game'));
+
 
 // MongoDB підключення
 mongoose.connect(MONGO_URI, {
