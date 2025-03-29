@@ -1,4 +1,3 @@
-// addGames.js
 const mongoose = require('mongoose');
 const Game = require('./models/Game');  // Тут імпортуємо модель гри
 
@@ -12,9 +11,10 @@ const addGame = async () => {
   try {
     const newGame = new Game({
       title: 'Forza Horizon 5',
-      description: 'Гонки',
-      link: 'https://some-game-link.com',
-      photo: '/images/ForzaHorizon5.jpg'
+      description: 'Forza Horizon 5 — це екстремальні гонки, де гравці можуть випробувати',
+      link: '',  // Лінк залишимо порожнім
+      photo: 'images\ForzaHorizon5.jpg',
+      genre: 'Гонки'  // Тепер жанр просто рядок
     });
 
     await newGame.save();  // Зберігаємо гру в базу

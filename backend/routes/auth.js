@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
 const User = require('../models/User');
-const Comment = require('../models/Comment');
 const Game = require('../models/Game');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
@@ -73,44 +72,6 @@ router.post('/login', async (req, res) => {
     });
   } catch (error) {
     res.status(500).json({ message: 'Server error' });
-  }
-});
-
-// Додавання коментаря
-router.post('/comments', async (req, res) => {
-  try {
-    const { userId, gameId, comment, rating } = req.body;
-
-    if (!userId || !gameId || !comment || !rating) {
-      return res.status(400).json({ message: 'All fields are required' });
-    }
-
-    // Перевірка чи є такий користувач
-    const user = await User.findById(userId);
-    if (!user) {
-      return res.status(404).json({ message: 'User not found' });
-    }
-
-    // Перевірка чи є така гра
-    const game = await Game.findById(gameId);
-    if (!game) {
-      return res.status(404).json({ message: 'Game not found' });
-    }
-
-    // Створення нового коментаря
-    const newComment = new Comment({
-      userId,
-      gameId,
-      comment,
-      rating,
-    });
-
-    await newComment.save();
-
-    res.status(201).json({ message: 'Comment added successfully', comment: newComment });
-  } catch (err) {
-    console.log(err);
-    res.status(500).json({ message: 'Failed to add comment' });
   }
 });
 

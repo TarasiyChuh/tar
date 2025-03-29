@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom'; 
+import './styles.css'
 
 function GameLibrary() {
   const [games, setGames] = useState([]);
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
 
+  // Завантаження ігор з сервера
   useEffect(() => {
     fetch('http://localhost:5000/api/games')
       .then((res) => res.json())
@@ -12,13 +14,14 @@ function GameLibrary() {
       .catch((error) => console.error('Error fetching games:', error));
   }, []);
 
-  const handleCardClick = (link) => {
-    const token = localStorage.getItem('token');
+  // Обробка натискання на картку гри
+  const handleCardClick = (gameId) => {
+    const token = localStorage.getItem('token'); // Перевірка на наявність токену
     if (!token) {
       alert('Будь ласка, увійди або зареєструйся, щоб переглядати деталі гри!');
-      navigate('/login');
+      navigate('/login'); // Якщо немає токену — перенаправляємо на логін
     } else {
-      navigate(link);
+      navigate(`/game-details/${gameId}`); // Якщо токен є — перенаправляємо на сторінку деталей гри
     }
   };
 
@@ -28,13 +31,13 @@ function GameLibrary() {
         <div
           key={game._id}
           className="game-card"
-          onClick={() => handleCardClick(game.link)}
+          onClick={() => handleCardClick(game._id)}  // Передаємо gameId при кліку
           style={{ cursor: 'pointer' }}
         >
           <img src={game.photo} alt={game.title} />
           <div className="game-info">
             <h2 className="game-title">{game.title}</h2>
-            <p className="game-description">{game.description}</p>
+            <p className="game-description">{game.genre}</p>
           </div>
         </div>
       ))}

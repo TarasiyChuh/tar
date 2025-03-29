@@ -24,11 +24,12 @@ function Login() {
         setError(data.message || 'Помилка логіну');
       } else {
         alert('Вхід успішний!');
-        // Збереження токена в localStorage
+        // Зберігаємо токен та дані користувача в localStorage
         localStorage.setItem('token', data.token);
+        localStorage.setItem('user', JSON.stringify(data.user));
         
         // Перехід на головну сторінку після успішного входу
-        navigate('/'); // Заміни '/home' на шлях до головної сторінки
+        navigate('/');
       }
     } catch (err) {
       setError('Сталася помилка. Спробуйте ще раз.');

@@ -96,3 +96,71 @@
 .game-page + .game-page {
     margin-top: 50px; /* Відстань між контейнерами */
 }
+
+
+
+
+.comments-section {
+  margin-top: 2rem;
+  padding: 1rem;
+  background: #f9f9f9;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Центрує контент */
+  justify-content: center; /* Центрує по вертикалі */
+  max-width: 800px; /* Обмежує максимальну ширину */
+  margin-left: auto;
+  margin-right: auto; /* Центрує саму секцію на сторінці */
+}
+
+.comment-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+.comment-form textarea {
+  resize: vertical;
+  min-height: 80px;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.rating-input {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.comment-form button {
+  align-self: flex-end;
+  padding: 0.5rem 1rem;
+  background: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.comment-form button:hover {
+  background: #0056b3;
+}
+
+.comments-list {
+  margin-top: 1rem;
+  width: 100%;
+}
+
+.comment {
+  padding: 0.5rem;
+  border-bottom: 1px solid #ddd;
+  width: 100%; /* Робить коментарі ширшими */
+  text-align: center; /* Центрує текст в коментарі */
+}
+
+.comment p {
+  margin: 0;
+}
