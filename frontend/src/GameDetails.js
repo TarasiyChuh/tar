@@ -35,7 +35,7 @@ function GameDetails() {
     fetchComments();
   }, [gameId]);
 
-  // Обробка відправки коментаря
+  // Обробка відправки коментаряі
   const handleCommentSubmit = async (e) => {
     e.preventDefault();
     console.log('Додаємо коментар...');
