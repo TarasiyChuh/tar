@@ -10,10 +10,10 @@ mongoose.connect('mongodb://localhost:27017/mydatabase', { useNewUrlParser: true
 const addGame = async () => {
   try {
     const newGame = new Game({
-      title: 'Forza Horizon 5',
+      title: 'frr',
       description: 'Forza Horizon 5 — це екстремальні гонки, де гравці можуть випробувати',
       link: '',  // Лінк залишимо порожнім
-      photo: 'images\ForzaHorizon5.jpg',
+      photo: 'images/AtomicHeart.jpg',
       genre: 'Гонки'  // Тепер жанр просто рядок
     });
 

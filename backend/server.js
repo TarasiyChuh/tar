@@ -1,38 +1,25 @@
-// Завантажуємо змінні середовища з файлу .env
+// server.js
 require('dotenv').config();
-
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 
 const app = express();
+app.use(cors());
+app.use(express.json());
 
-// Middleware
-app.use(cors());  // Дозволяє CORS запити
-app.use(express.json());  // Парсить JSON у тілі запиту
+const MONGO_URI = process.env.MONGO_URI;
+const JWT_SECRET = process.env.JWT_SECRET;
 
-// Підключення до MongoDB
-const MONGO_URI = process.env.MONGO_URI;  // Беремо URI з .env файлу
-const JWT_SECRET = process.env.JWT_SECRET;  // Беремо секретний ключ з .env файлу
-
-// Роутери
-app.use('/api/auth', require('./routes/auth'));  // Роут для аутентифікації
-app.use('/api/games', require('./routes/game'));  // Роут для ігор
+// Підключення інших роутів
+app.use('/api/auth', require('./routes/auth'));      // Аутентифікація та користувачі (твої існуючі маршрути)
+app.use('/api/games', require('./routes/game'));
 app.use('/api/comments', require('./routes/comment'));
+app.use('/api/chats', require('./routes/chatRoutes')); // Новий роут для чату
 
-
-// Підключення до MongoDB
-mongoose.connect(MONGO_URI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true
-})
+mongoose.connect(MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log('MongoDB connected'))
   .catch(err => console.log('Error connecting to MongoDB:', err));
 
-// Налаштування порту
-const PORT = process.env.PORT || 5000;  // Якщо в середовищі є PORT, використовуємо його, інакше 5000ы
-
-// Запуск сервера
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-});
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

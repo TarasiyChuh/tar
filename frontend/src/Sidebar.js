@@ -1,4 +1,5 @@
-import React from 'react';
+// Sidebar.jsx
+import React from 'react'; 
 import { Link } from "react-router-dom";
 import { useNavigate } from 'react-router-dom';
 import './App.css';
@@ -7,9 +8,8 @@ function Sidebar() {
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    // Видаляємо токен і виконуємо перенаправлення на головну сторінку
     localStorage.removeItem('token');
-    navigate('/');  // Перехід на головну сторінку після виведення
+    navigate('/');
   };
 
   return (
@@ -19,8 +19,9 @@ function Sidebar() {
       <Link to="/library" className="sidebar-button">Бібліотека</Link>
       <Link to="/settings" className="sidebar-button">Налаштування</Link>
       <Link to="/free-games" className="sidebar-button">Безкоштовні ігри</Link>
+      {/* Нова кнопка для користувачів */}
+      <Link to="/users" className="sidebar-button">Користувачі</Link>
 
-      {/* Виведення кнопок для логіну та реєстрації, якщо користувач не залогінений */}
       {!localStorage.getItem('token') ? (
         <>
           <Link to="/login" className="sidebar-button">Логін</Link>

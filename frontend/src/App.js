@@ -1,28 +1,40 @@
 // App.js
 import React from 'react';
-import './App.css'; // Імпортуємо стилі
-import { Routes, Route } from 'react-router-dom'; // Для маршрутизації
-import Sidebar from './Sidebar'; // Бокова панель
-import Search from './Search'; // Панель пошуку
-import GameLibrary from './GameLibrary'; // Бібліотека ігор
-import GameDetails from './GameDetails'; // Деталі гри
-import Register from './Register'; // Реєстрація
-import Login from './Login'; // Логін
-import FreeGames from './FreeGames'; // Безкоштовні ігри
+import './App.css';
+import { Routes, Route } from 'react-router-dom';
+import Sidebar from './Sidebar';
+import Search from './Search';
+import GameLibrary from './GameLibrary';
+import GameDetails from './GameDetails';
+import Register from './Register';
+import Login from './Login';
+import FreeGames from './FreeGames';
+import Account from './Account';
+import ChatInitiator from './ChatInitiator';
+import ProfilePage from './ProfilePage';
+import ChatRoom from './ChatRoom';
 
 function App() {
+  // Для прикладу, нехай currentUserId = "67d2cc2761ccf6d642399ac6" (тобто твій ID)
+  const currentUserId = "67d2cc2761ccf6d642399ac6";
+
   return (
     <div className="app-container">
-      <Sidebar /> {/* Бокова панель */}
-      <Search /> {/* Панель пошуку */}
+      <Sidebar />
+      <Search />
       <div className="main-content">
         <Routes>
-          {/* Основні маршрути */}
-          <Route path="/" element={<GameLibrary />} /> {/* Головна сторінка з бібліотекою ігор */}
-          <Route path="/game-details/:gameId" element={<GameDetails />} /> {/* Сторінка деталей гри */}
-          <Route path="/register" element={<Register />} /> {/* Сторінка реєстрації */}
-          <Route path="/login" element={<Login />} /> {/* Сторінка входу */}
-          <Route path="/free-games" element={<FreeGames />} /> {/* Сторінка безкоштовних ігор */}
+          <Route path="/" element={<GameLibrary />} />
+          <Route path="/game-details/:gameId" element={<GameDetails />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/free-games" element={<FreeGames />} />
+          <Route path="/account" element={<Account />} />
+          {/* Маршрут для початку чату */}
+          <Route path="/users" element={<ChatInitiator currentUserId={currentUserId} />} />
+          <Route path="/profile/:userId" element={<ProfilePage />} />
+          {/* Маршрут для конкретного чату */}
+          <Route path="/chat/:chatId" element={<ChatRoom currentUserId={currentUserId} />} />
         </Routes>
       </div>
     </div>

@@ -5,96 +5,89 @@ const Game = require('../models/Game');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
-// Твій секретний ключ для JWT
-const JWT_SECRET = 'supersecretkey123';  // Той самий ключ, що й у server.js
+const JWT_SECRET = 'supersecretkey123'; // Має збігатися з ключем у server.js
 
-// Register
+// Реєстрація
 router.post('/register', async (req, res) => {
   try {
     const { username, email, password } = req.body;
-
-    // Перевіряємо чи вже існує користувач
+    if (!username || !email || !password) {
+      return res.status(400).json({ message: 'Усі поля обов’язкові' });
+    }
     const existingUser = await User.findOne({ email });
     if (existingUser) {
-      return res.status(400).json({ message: 'User already exists' });
+      return res.status(400).json({ message: 'Користувач з таким email вже існує' });
     }
-
-    // Хешуємо пароль
-    const salt = await bcrypt.genSalt(10);
-    const hashedPassword = await bcrypt.hash(password, salt);
-
-    // Створюємо користувача
-    const newUser = new User({
-      username,
-      email,
-      password: hashedPassword,
-    });
-
+    const hashedPassword = await bcrypt.hash(password, 10);
+    const newUser = new User({ username, email, password: hashedPassword });
     await newUser.save();
-
-    res.status(201).json({ message: 'User registered successfully' });
+    res.status(201).json({ message: 'Реєстрація успішна' });
   } catch (error) {
-    res.status(500).json({ message: 'Server error' });
+    console.error('Помилка при реєстрації:', error);
+    res.status(500).json({ message: 'Внутрішня помилка сервера' });
   }
 });
 
-// Login
+// Вхід
 router.post('/login', async (req, res) => {
   try {
     const { email, password } = req.body;
-
-    // Знаходимо користувача
+    if (!email || !password) {
+      return res.status(400).json({ message: 'Усі поля обов’язкові' });
+    }
     const user = await User.findOne({ email });
     if (!user) {
-      return res.status(400).json({ message: 'Invalid credentials' });
+      return res.status(401).json({ message: 'Невірний email або пароль' });
     }
-
-    // Перевіряємо пароль
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
-      return res.status(400).json({ message: 'Invalid credentials' });
+      return res.status(401).json({ message: 'Невірний email або пароль' });
     }
-
-    // Генеруємо токен
-    const token = jwt.sign(
-      { id: user._id },
-      JWT_SECRET,  // Використовуємо ключ тут
-      { expiresIn: '1h' }
-    );
-
+    const token = jwt.sign({ id: user._id }, JWT_SECRET, { expiresIn: '1h' });
     res.json({
       token,
-      user: {
-        id: user._id,
-        username: user.username,
-        email: user.email
-      }
+      user: { id: user._id, username: user.username, email: user.email },
     });
   } catch (error) {
-    res.status(500).json({ message: 'Server error' });
+    console.error('Помилка при вході:', error);
+    res.status(500).json({ message: 'Внутрішня помилка сервера' });
+  }
+});
+
+// Отримання всіх користувачів (без паролів)
+router.get('/users', async (req, res) => {
+  try {
+    // Використовуємо _id, username, email, createdAt; якщо користувачів немає, повернеться порожній масив
+    const users = await User.find().select('_id username email createdAt');
+    res.json(users);
+  } catch (error) {
+    console.error('Помилка при отриманні користувачів:', error);
+    res.status(500).json({ message: 'Помилка сервера при отриманні списку користувачів' });
   }
 });
 
 // Отримання всіх ігор
-router.get('/', async (req, res) => {
+router.get('/games', async (req, res) => {
   try {
     const games = await Game.find();
     res.json(games);
   } catch (error) {
-    res.status(500).json({ message: 'Error fetching games' });
+    console.error('Помилка при отриманні ігор:', error);
+    res.status(500).json({ message: 'Помилка сервера при отриманні списку ігор' });
   }
 });
 
 // Отримання гри за її ID
-router.get('/:id', async (req, res) => {
+router.get('/games/:id', async (req, res) => {
   try {
     const game = await Game.findById(req.params.id);
     if (!game) {
-      return res.status(404).json({ message: 'Game not found' });
+      return res.status(404).json({ message: 'Гра не знайдена' });
     }
     res.json(game);
   } catch (error) {
-    res.status(500).json({ message: 'Error fetching game' });
+    console.error('Помилка при отриманні гри:', error);
+    res.status(500).json({ message: 'Помилка сервера при отриманні гри' });
   }
 });
 

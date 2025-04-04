@@ -1,0 +1,32 @@
+.users-list-container {
+  max-width: 400px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.users-list-container h2 {
+  color: #333;
+}
+
+.users-list {
+  list-style: none;
+  padding: 0;
+}
+
+.users-list li {
+  padding: 10px;
+  margin: 5px 0;
+  background-color: #fff;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.users-list li:hover {
+  background-color: #e0e0e0;
+  transform: scale(1.05);
+}

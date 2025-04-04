@@ -26,7 +26,7 @@ function Search() {
           placeholder="Пошук ігор, доповнення та багато іншого"
         />
         <button onClick={performSearch}>
-          <img src="page/free-icon-loupe-751463.png" alt="Search Icon" width="20" height="20" />
+          <img src="/page/free-icon-loupe-751463.png" alt="Search Icon" width="20" height="20" />
         </button>
       </div>
     </div>

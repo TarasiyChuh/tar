@@ -1,42 +1,126 @@
-.free-games-container {
-    text-align: center;
-    margin-top: 50px;
+/* FreeGames.css */
+
+.free-games-title {
+  font-size: 2.5em;
+  color: #333; /* Темно-сірий для світлого верху */
+  text-align: center;
+  margin: 40px 0 30px;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); /* Тінь для глибини */
+  font-weight: bold;
+}
+
+.games-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 25px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 10px;
+}
+
+.free-game-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background: rgba(255, 255, 255, 0.05); /* Ледве помітна прозорість */
+  backdrop-filter: blur(8px); /* Скляний ефект у монохромі */
+  border: 1px solid rgba(255, 255, 255, 0.1); /* Тонка біла обводка */
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* М’яка тінь */
+  text-decoration: none;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+  animation: cardFadeIn 0.5s ease-out; /* Анімація появи */
+}
+
+.free-game-card:hover {
+  transform: translateY(-5px); /* Легкий підйом */
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.5); /* Посилена тінь */
+  background: rgba(255, 255, 255, 0.15); /* Легке підсвічування */
+}
+
+.free-game-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(45deg, rgba(255, 255, 255, 0.05), rgba(0, 0, 0, 0.1)); /* Монохромний градієнт */
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 0;
+}
+
+.free-game-card:hover::before {
+  opacity: 1; /* Тонкий ефект при наведенні */
+}
+
+.game-image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 15px 15px 0 0;
+  transition: filter 0.3s ease;
+  position: relative;
+  z-index: 1;
+}
+
+.free-game-card:hover .game-image {
+  filter: contrast(1.2) brightness(1.1); /* Посилення контрасту */
+}
+
+.game-content {
+  padding: 15px;
+  text-align: center;
+  flex-grow: 1;
+  position: relative;
+  z-index: 1;
+}
+
+.game-title {
+  font-size: 1.6em;
+  color: #fff; /* Білий для темного фону */
+  margin-bottom: 10px;
+  font-weight: bold;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+  transition: color 0.3s ease;
+}
+
+.free-game-card:hover .game-title {
+  color: #e0e0e0; /* Легке затемнення при наведенні */
+}
+
+.game-description {
+  font-size: 1em;
+  color: #ccc; /* Світло-сірий для читабельності */
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* Анімація появи */
+@keyframes cardFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
   }
-  
-  h1 {
-    font-size: 36px;
-    color: #333;
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
-  
+}
+
+/* Адаптивність */
+@media (max-width: 600px) {
+  .free-games-title {
+    font-size: 2em;
+  }
+
   .games-list {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 20px;
-    margin-top: 30px;
+    grid-template-columns: 1fr;
   }
-  
-  .free-game-card {
-    display: block;
-    width: 200px;
-    padding: 20px;
-    background-color: #f4f4f4;
-    border-radius: 8px;
-    border: 1px solid #ccc;
-    text-decoration: none;
-    color: #333;
-    transition: background-color 0.3s ease, transform 0.3s ease;
+
+  .game-image {
+    height: 150px;
   }
-  
-  .free-game-card:hover {
-    background-color: #e1e1e1;
-    transform: scale(1.05);
-  }
-  
-  .game-card-content h3 {
-    font-size: 20px;
-    margin-bottom: 10px;
-  }
-  
- 
-  
+}

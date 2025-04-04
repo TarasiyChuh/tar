@@ -1,14 +1,18 @@
 body {
   font-family: Arial, sans-serif;
-  background-color: #212121;
+  background: linear-gradient(to bottom, #f0f0f0, #212121); /* Градієнт від світлого до темного */
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  min-height: 100vh;
 }
 
 h1 {
   text-align: center;
   margin-top: 20px;
+  font-size: 2.5em; /* Більший розмір для ефектності */
+  color: #333; /* Темно-сірий для контрасту на світлому фоні */
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3); /* Легка тінь */
 }
 
 .game-library {
@@ -16,55 +20,56 @@ h1 {
   flex-wrap: wrap;
   justify-content: center;
   gap: 20px;
-  padding: 20px;
+  padding: 40px; /* Більше відступів */
 }
 
 .game-card {
-  background-color: #383838;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+  background: linear-gradient(135deg, #383838, #2a2a2a); /* Темний градієнт для карток */
+  border-radius: 12px; /* М’якше закруглення */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5); /* Глибша тінь */
   overflow: hidden;
   width: 200px;
-  transition: transform 0.3s;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
   text-decoration: none;
   color: inherit;
   box-sizing: border-box;
 }
 
 .game-card:hover {
-  transform: scale(1.05);
+  transform: scale(1.05); /* Збільшення зі старого стилю */
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6); /* Посилена тінь */
 }
 
 .game-card img {
   width: 100%;
-  height: 300px; /* Збільшена висота для зображень */
-  object-fit: cover; /* Масштабування зображення для покриття контейнера */
+  height: 300px;
+  object-fit: cover;
+  border-radius: 12px 12px 0 0; /* Закруглення тільки зверху */
 }
 
 .game-card .game-info {
   padding: 15px;
-  text-align: left; /* Вирівнювання тексту вліво */
+  text-align: center; /* Центрування для естетичності */
 }
 
 .game-card .game-title {
   font-family: 'Arial Black', Gadget, sans-serif;
   font-size: 1.2em;
-  color: #ffffff;
+  color: #ffffff; /* Білий текст для контрасту */
   margin: 0;
   width: 100%;
   box-sizing: border-box;
-  word-wrap: break-word; /* Дозволяє переносити довгі слова */
-  display: block; /* Запобігає зміщенню тексту */
-  
+  word-wrap: break-word;
+  display: block;
 }
 
 .game-card .game-description {
   font-size: 0.9em;
-  color: #bdaaaa;
+  color: #bdaaaa; /* Світло-сірий зі старого стилю */
   width: 100%;
   box-sizing: border-box;
-  word-wrap: break-word; /* Дозволяє переносити довгі слова */
-  display: block; /* Запобігає зміщенню тексту */
+  word-wrap: break-word;
+  display: block;
 }
 
 /* Пошуковий контейнер */
@@ -79,10 +84,10 @@ h1 {
   display: flex;
   align-items: center;
   width: 600px;
-  background-color: #333;
+  background: linear-gradient(90deg, #ffffff, #e0e0e0); /* Світлий градієнт */
   border-radius: 20px;
   overflow: hidden;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* М’якша тінь */
 }
 
 .search-box input[type="text"] {
@@ -90,32 +95,33 @@ h1 {
   padding: 10px;
   border: none;
   outline: none;
-  color: #fff;
-  background-color: #333;
+  color: #333; /* Темний текст для світлого фону */
+  background: transparent; /* Прозорий для градієнта */
   font-size: 1em;
 }
 
 .search-box input[type="text"]::placeholder {
-  color: #888;
+  color: #666; /* Світло-сірий плейсхолдер */
 }
 
 .search-box button {
-  background-color: #333;
+  background: linear-gradient(90deg, #333, #555); /* Темний градієнт для кнопки */
   border: none;
   padding: 10px 20px;
   color: #fff;
   cursor: pointer;
-  transition: background-color 0.3s;
+  transition: transform 0.3s ease, background 0.3s ease;
 }
 
 .search-box button:hover {
-  background-color: #3f3f3f;
+  transform: scale(1.05); /* Легке збільшення */
+  background: linear-gradient(90deg, #555, #777); /* Світліший градієнт */
 }
 
 /* Менюшка */
 .sidebar {
   width: 200px;
-  background-color: #1f1f1f;
+  background: linear-gradient(to bottom, #1f1f1f, #383838); /* Темний градієнт */
   padding: 20px;
   box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
   position: fixed;
@@ -125,12 +131,35 @@ h1 {
 .sidebar-button {
   display: block;
   padding: 15px;
-  color: #fff;
+  color: #ffffff;
   text-decoration: none;
-  transition: background-color 0.3s;
+  background: linear-gradient(90deg, #333, #444); /* Градієнт для кнопок */
+  border-radius: 5px;
+  margin-bottom: 10px; /* Відступ між кнопками */
+  transition: transform 0.3s ease, background 0.3s ease;
 }
 
 .sidebar-button:hover {
-  background-color: #333;
-  border-radius: 5px;
+  transform: scale(1.03); /* Легке збільшення */
+  background: linear-gradient(90deg, #555, #666); /* Світліший градієнт */
+}
+
+.rating-section .star-rating {
+  display: inline-flex;
+  gap: 5px; /* Відступ між зірочками */
+}
+
+.rating-section .star {
+  font-size: 24px; /* Розмір зірочок */
+  transition: transform 0.2s ease, color 0.2s ease; /* Анімація для зірочок */
+  cursor: pointer;
+}
+
+.rating-section .star:hover:not(:disabled) {
+  transform: scale(1.2); /* Збільшення при наведенні */
+  color: #ffd700; /* Золотий колір при наведенні */
+}
+
+.rating-section .star:disabled {
+  cursor: default; /* Звичайний курсор, якщо зірочки неактивні */
 }
