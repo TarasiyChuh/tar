@@ -1,19 +1,22 @@
-// UsersList.js
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import './UsersList.css';
 
-const UsersList = ({ onSelectUser }) => {
+const UsersList = ({ onSelectUser, currentUserId }) => {
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
-    axios.get('http://localhost:5000/api/auth/users')
+    axios.get('http://localhost:5000/api/auth/users', {
+      headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
+    })
       .then(response => {
         console.log("Users received:", response.data);
-        setUsers(response.data);
+        // Фільтруємо поточного користувача зі списку
+        const filteredUsers = response.data.filter(user => user._id !== currentUserId);
+        setUsers(filteredUsers);
       })
       .catch(error => console.error('Error fetching users:', error));
-  }, []);
+  }, [currentUserId]);
 
   return (
     <div className="users-list-container">

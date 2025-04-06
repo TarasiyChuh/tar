@@ -11,11 +11,11 @@ app.use(express.json());
 const MONGO_URI = process.env.MONGO_URI;
 const JWT_SECRET = process.env.JWT_SECRET;
 
-// Підключення інших роутів
-app.use('/api/auth', require('./routes/auth'));      // Аутентифікація та користувачі (твої існуючі маршрути)
+// Підключення маршрутів
+app.use('/api/auth', require('./routes/auth'));      // Аутентифікація та користувачі
 app.use('/api/games', require('./routes/game'));
 app.use('/api/comments', require('./routes/comment'));
-app.use('/api/chats', require('./routes/chatRoutes')); // Новий роут для чату
+app.use('/api/chats', require('./routes/chat'));
 
 mongoose.connect(MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log('MongoDB connected'))
