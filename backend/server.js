@@ -16,6 +16,8 @@ app.use('/api/auth', require('./routes/auth'));      // Аутентифікац
 app.use('/api/games', require('./routes/game'));
 app.use('/api/comments', require('./routes/comment'));
 app.use('/api/chats', require('./routes/chat'));
+app.use('/api/library', require('./routes/library'));
+
 
 mongoose.connect(MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log('MongoDB connected'))

@@ -91,4 +91,56 @@ router.get('/games/:id', async (req, res) => {
   }
 });
 
+// Маршрут для отримання даних користувача за ID
+router.get('/users/:id', async (req, res) => {
+  try {
+    const user = await User.findById(req.params.id);
+    if (!user) {
+      return res.status(404).json({ message: 'Користувача не знайдено' });
+    }
+    res.json({
+      _id: user._id,
+      username: user.username,
+      email: user.email,
+      createdAt: user.createdAt
+    });
+  } catch (error) {
+    console.error('Error fetching user:', error);
+    res.status(500).json({ message: 'Помилка сервера' });
+  }
+});
+
+
+// Маршрут для отримання ігор користувача
+router.get('/games/user/:userId', async (req, res) => {
+  try {
+    const user = await User.findById(req.params.userId).populate('games');
+    if (!user) {
+      return res.status(404).json({ message: 'Користувача не знайдено' });
+    }
+    res.json(user.games); // Повертаємо список ігор користувача
+  } catch (err) {
+    res.status(500).json({ message: 'Помилка сервера', error: err.message });
+  }
+});
+
+router.get('/users/:id', async (req, res) => {
+  try {
+    const user = await User.findById(req.params.id).populate('library');
+    if (!user) {
+      return res.status(404).json({ message: 'Користувача не знайдено' });
+    }
+    res.json({
+      _id: user._id,
+      username: user.username,
+      email: user.email,
+      createdAt: user.createdAt,
+      library: user.library  // тепер поле заповнене
+    });
+  } catch (error) {
+    console.error('Error fetching user:', error);
+    res.status(500).json({ message: 'Помилка сервера' });
+  }
+});
+
 module.exports = router;

@@ -11,7 +11,6 @@ const UsersList = ({ onSelectUser, currentUserId }) => {
     })
       .then(response => {
         console.log("Users received:", response.data);
-        // Фільтруємо поточного користувача зі списку
         const filteredUsers = response.data.filter(user => user._id !== currentUserId);
         setUsers(filteredUsers);
       })

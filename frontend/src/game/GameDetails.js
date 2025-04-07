@@ -123,6 +123,32 @@ function GameDetails() {
     }
   };
 
+    // Обробка натискання кнопки "Завантажити"
+    const handleDownload = async () => {
+      const storedUser = JSON.parse(localStorage.getItem('user'));
+      if (!storedUser) {
+        alert('Будь ласка, увійдіть, щоб додати гру до бібліотеки.');
+        return;
+      }
+      const userId = storedUser.id || storedUser._id;
+    
+      try {
+        const response = await fetch('http://localhost:5000/api/library/add', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ userId, gameData: { gameId, title: game.title, photo: game.photo } })
+        });
+        if (response.ok) {
+          alert('Гра додана до вашої бібліотеки!');
+        } else {
+          alert('Помилка при додаванні гри до бібліотеки.');
+        }
+      } catch (error) {
+        console.error('Помилка при додаванні гри:', error);
+      }
+    };
+    
+
   if (!game) {
     return <p>Завантаження гри...</p>;
   }
@@ -158,7 +184,7 @@ function GameDetails() {
             </div>
             {ratingError && <p style={{ color: 'red' }}>{ratingError}</p>}
           </div>
-          <button className="download-button">Завантажити</button>
+          <button className="download-button" onClick={handleDownload}>Завантажити</button>
         </div>
       </div>
 
